@@ -1,4 +1,4 @@
-# CORS-one-liner
+# CORS one liner command
 
 A one liner Bash command which finds CORS in every possible endpoint. Simply replace https://example.com with the URL you want. This will help you scan for CORS vulnerability without the need of an external tool.
 

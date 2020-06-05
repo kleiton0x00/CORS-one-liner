@@ -16,8 +16,10 @@ A one liner Bash command cheatsheet which finds CORS missconfiguration in every 
 ## Whitelisted null origin value payload
 `curl -I -X GET 'https://example.com' | if grep 'Access-Control-Allow-Origin: null';then echo [Potential CORS Found];fi`
 
+# Workflow
+If the one-liner bash command displays output, it means that the website is vulnerable to the respective CORS missconfiguration. If no output is displayed while executed, no vulnerability was detected.
 
-## Requirement
+# Requirement
 
 - Download Gua from https://github.com/lc/gau (only for the first payload)
 - Download cURL `sudo apt install curl` or `sudo apt-get install curl`

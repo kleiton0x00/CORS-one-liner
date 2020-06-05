@@ -22,7 +22,3 @@ Download Gua from https://github.com/lc/gau (only for the first payload)
 First, all the website's endpoints are crawled by Gua. For each endpoint, we add an additional header (Origin: https://evil.com) to the request and we fire it up. 
 For each request, **IF** only one of these 3 Headers is found on the request's response, the endpoint is vulnerable to CORS missconfiguration:
 > Access-Control-Allow-Origin: https://evil.com 
-
-> Access-Control-Allow-Origin: null
-
-> Access-Control-Allow-Credentials: true

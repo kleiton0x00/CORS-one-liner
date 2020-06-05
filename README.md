@@ -13,7 +13,10 @@ A one liner Bash command which finds CORS missconfiguration in every possible en
 ## Payload with cookie (authenticated)
 `curl -s -I -H "Cookie: session=put_session_value_here" -H "Origin: https://evil.com" -X GET 'https://example.com' | if grep 'https://evil.com'; then echo [Potentional CORS Found]; fi`
 
-## Requirement
+## Whitelisted null origin value payload
+`curl -I -X GET 'https://example.com' | if grep 'Access-Control-Allow-Origin: null';then echo [Whitelisted null origin value Vulnerability]`
+
+## Requirement MAYBE DELETE THIS
 
 Download Gua from https://github.com/lc/gau (only for the first payload)
 

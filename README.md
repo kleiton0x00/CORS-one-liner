@@ -19,5 +19,5 @@ A one liner Bash command which finds CORS missconfiguration in every possible en
 
 ## Requirement
 
-Download Gua from https://github.com/lc/gau (only for the first payload)
-Download cURL `sudo apt install curl` or `sudo apt-get install curl`
+- Download Gua from https://github.com/lc/gau (only for the first payload)
+- Download cURL `sudo apt install curl` or `sudo apt-get install curl`

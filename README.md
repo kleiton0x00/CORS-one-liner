@@ -10,7 +10,7 @@ A one liner Bash command which finds CORS missconfiguration in every possible en
 
 `curl -s -I -H "Origin: https://evil.com" -X GET 'https://example.com' | if grep 'https://evil.com'; then echo [Potentional CORS Found]; fi`
 
-## Payload with cookie (authentication only)
+## Payload with cookie (authenticated)
 `curl -s -I -H "Cookie: session=put_session_value_here" -H "Origin: https://evil.com" -X GET 'https://example.com' | if grep 'https://evil.com'; then echo [Potentional CORS Found]; fi`
 
 ## Requirement

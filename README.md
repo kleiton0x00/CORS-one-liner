@@ -19,9 +19,3 @@ A one liner Bash command which finds CORS missconfiguration in every possible en
 ## Requirement MAYBE DELETE THIS
 
 Download Gua from https://github.com/lc/gau (only for the first payload)
-
-## Workflow
-
-First, all the website's endpoints are crawled by Gua. For each endpoint, we add an additional header (Origin: https://evil.com) to the request and we fire it up. 
-For each request, **IF** only one of these 3 Headers is found on the request's response, the endpoint is vulnerable to CORS missconfiguration:
-> Access-Control-Allow-Origin: https://evil.com 

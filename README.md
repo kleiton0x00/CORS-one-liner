@@ -2,7 +2,7 @@
 
 A one liner Bash command cheatsheet which finds CORS missconfiguration in every possible method. Simply replace https://example.com with the URL you want to target. This will help you scan for CORS vulnerability without the need of an external tool.
 
-## Basic Origin Reflection payload
+## Basic Origin Reflection payload - Crawls the whole endpoints of a website
 
 `gau 'https://example.com' | while read url;do target=$(curl -s -I -H "Origin: https://evil.com" -X GET $url) | if grep 'https://evil.com'; then [Potentional CORS Found]echo $target;fi;done`
 

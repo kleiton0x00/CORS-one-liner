@@ -17,6 +17,7 @@ A one liner Bash command which finds CORS missconfiguration in every possible en
 `curl -I -X GET 'https://example.com' | if grep 'Access-Control-Allow-Origin: null';then echo [Potential CORS Found];fi`
 
 
-## Requirement MAYBE DELETE THIS
+## Requirement
 
 Download Gua from https://github.com/lc/gau (only for the first payload)
+Download cURL `sudo apt install curl` or `sudo apt-get install curl`

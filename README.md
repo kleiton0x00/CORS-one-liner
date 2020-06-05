@@ -8,7 +8,7 @@ A one liner Bash command which finds CORS in every possible endpoint. Simply rep
 
 ## Requirement
 
-Be sure to download Gua from https://github.com/lc/gau.
+Download Gua from https://github.com/lc/gau
 
 ## Workflow
 

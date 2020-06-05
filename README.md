@@ -4,7 +4,7 @@ A one liner Bash command cheatsheet which finds CORS missconfiguration in every 
 
 ## Basic Origin Reflection payload
 
-`gau 'https://example.com' | while read url;do target=$(curl -s -I -H "Origin: https://evil.com" -X GET $url | grep -o '(https://evil.com)'); echo -e "Trying endpoint:\e[1;31m $url\e[0m" "$target"; done | sed 's/evil.com/[Potentional CORS Found]/g'`
+`gau 'https://ac341f051f95be898074dc8a00b90040.web-security-academy.net/accountDetails' | while read url;do target=$(curl -s -I -H "Cookie: session=R82gI39R0yguU4hnylUEXh70xpLjacnl" -H "Origin: https://evil.com" -X GET $url) | if grep 'https://evil.com'; then [Potentional CORS Found]echo $target;fi;done'`
 
 ## Basic Origin Reflection payload
 

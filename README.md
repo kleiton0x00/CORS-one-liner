@@ -78,7 +78,7 @@ HTTP Header is excpected: `Access-Control-Allow-Origin: https://example.com.evil
 
 `site="https://example.com";curl -s -I -H "Origin: $site.evil.com" -X GET "$site" | if grep "Origin: Access-Control-Allow-Origin: $site.evil.com"; then echo [Potentional CORS Found]; else echo Nothing found;fi`
 
-## 6 Origin domain extension not validated vulnerability - (Manualy) Send request in only one endpoint
+## 6.2 Origin domain extension not validated vulnerability - (Automatic) Send request to every crawled endpoint of the website
 ### Workflow:  
 HTTP Header payload is sent: `Origin: example.com.evil.com`  
 HTTP Header is excpected: `Access-Control-Allow-Origin: https://example.com.evil.com`  

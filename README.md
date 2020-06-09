@@ -35,7 +35,7 @@ HTTP Header is excpected: `Access-Control-Allow-Origin: null`
 No HTTP Header payload is sent   
 HTTP Header is excpected: `Access-Control-Allow-Origin: null`  
 
-`site="https://example.com" ; gau "$site" | while read url;do target=$(curl -s -I -X GET "$url") | if grep 'Access-Control-Allow-Origin: null'; then echo [Potentional CORS Found] "$url"; else echo Nothing on: "$target";fi;done`
+`site="https://example.com" ; gau "$site" | while read url;do target=$(curl -s -I -X GET "$url") | if grep 'Access-Control-Allow-Origin: null'; then echo [Potentional CORS Found] "$url"; else echo Nothing on: "$url";fi;done`
 
 ## 3.2 Whitelisted null origin value payload - (Manualy) Send request in only one endpoint
 No HTTP Header payload is sent   
@@ -50,6 +50,13 @@ HTTP Header is excpected: `Access-Control-Allow-Origin: evil.example.com`
 
 `url="https://example.com" ; curl -s -I -H "Origin: evil.$url" -X GET "$url" | if grep "Access-Control-Allow-Origin: evil.$url"; then echo [Potential CORS Found]; else echo [No CORS found]; fi`
 
+## 4.2 Trusted subdomain in Origin payload [ *.example.com ] - (Automatic) Send request to every crawled endpoint of the website
+### Workflow:  
+HTTP Header payload is sent: `Origin: evil.example.com`  
+HTTP Header is excpected: `Access-Control-Allow-Origin: evil.example.com`  
+
+`site="https://example.com" ; gau "$site" | while read url;do target=$(curl -s -I -H "Origin: evil.$url" -X GET "$url") | if grep 'Access-Control-Allow-Origin: null'; then echo [Potentional CORS Found] "$url"; else echo Nothing on: "$url";fi;done`
+
 ## 5 Abuse on not properly Domain validation - (Note: Replace URL with only domain - without http(s) protocols) - (Manualy)
 ### Workflow:  
 HTTP Header payload is sent: `Origin: notexample.com`  
@@ -57,12 +64,26 @@ HTTP Header is excpected: `Access-Control-Allow-Origin: https://notexample.com`
 
 `site="example.com";curl -s -I -H "Origin: https://not$site" -X GET "$site"| if grep "Access-Control-Allow-Origin: https://not$site"; then echo [Potentional CORS Found]; else echo Nothing found;fi`
 
+## 5.2 Abuse on not properly Domain validation - (Note: Replace URL with only domain - without http(s) protocols) - (Automatic) Send request to every crawled endpoint of the website
+### Workflow:  
+HTTP Header payload is sent: `Origin: notexample.com`  
+HTTP Header is excpected: `Access-Control-Allow-Origin: https://notexample.com`  
+
+`site="https://example.com" ; gau "$site" | while read url;do target=$(curl -s -I -H "Origin: https://not$site" -X GET "$url") | if grep 'Access-Control-Allow-Origin: https://not$site'; then echo [Potentional CORS Found] "$url"; else echo Nothing on: "$url";fi;done`
+
 ## 6 Origin domain extension not validated vulnerability - (Manualy) Send request in only one endpoint
 ### Workflow:  
 HTTP Header payload is sent: `Origin: example.com.evil.com`  
 HTTP Header is excpected: `Access-Control-Allow-Origin: https://example.com.evil.com`  
 
 `site="https://example.com";curl -s -I -H "Origin: $site.evil.com" -X GET "$site" | if grep "Origin: Access-Control-Allow-Origin: $site.evil.com"; then echo [Potentional CORS Found]; else echo Nothing found;fi`
+
+## 6 Origin domain extension not validated vulnerability - (Manualy) Send request in only one endpoint
+### Workflow:  
+HTTP Header payload is sent: `Origin: example.com.evil.com`  
+HTTP Header is excpected: `Access-Control-Allow-Origin: https://example.com.evil.com`  
+
+`site="https://example.com" ; gau "$site" | while read url;do target=$(curl -s -I -H "Origin: $site.evil.com" -X GET "$url") | if grep "Origin: Access-Control-Allow-Origin: $site.evil.com"; then echo [Potentional CORS Found] "$url"; else echo Nothing on: "$url";fi;done`
 
 # Requirements
 

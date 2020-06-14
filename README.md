@@ -85,6 +85,13 @@ HTTP Header is excpected: `Access-Control-Allow-Origin: https://example.com.evil
 
 `site="https://example.com" ; gau "$site" | while read url;do target=$(curl -s -I -H "Origin: $site.evil.com" -X GET "$url") | if grep "Origin: Access-Control-Allow-Origin: $site.evil.com"; then echo [Potentional CORS Found] "$url"; else echo Nothing on: "$url";fi;done`
 
+## 7 Advanced Bypassing using special characters + encoded - (Manual) Send request in only one endpoint  
+### Workflow:
+HTTP Header payload is sent `Origin: example.com!.evil.com`  
+HTTP Header is excpected: `Access-Control-Allow-Origin: https://example.com!.evil.com`  
+
+```site="https://example.com";payloads=("!" "(" ")" "'" ";" "=" "^" "{" "}" "|" "~" '"' '`' "," "%60" "%0b") ; for payload in ${payloads[*]}; do target=$(curl -s -I -H "Origin: $site$payload.evil.com" -X GET "$site") | if grep '$site$payload.evil.com'; then echo [+] Payload Reflected: $site$payload.evil.com; else echo Nothing found with: $site$payload.evil.com;fi;done```
+
 # Requirements
 
 - Download Gua from https://github.com/lc/gau (only for the automatic crawler payloads)

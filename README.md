@@ -7,7 +7,7 @@ This is an extremely helpful and practical Cheatsheet for Bug Hunters, which hel
 HTTP Header payload is sent: `Origin: https://evil.com`  
 HTTP Header is excpected: `Access-Control-Allow-Origin: https://evil.com`  
 
-`site="https://example.com"; gau "$site" | while read url;do target=$(curl -s -I -H "Origin: https://evil.com" -X GET $url) | if grep 'https://evil.com'; then [Potentional CORS Found]echo $url;else echo Nothing on "$url";fi;done`
+`site="https://example.com"; gau "$site" | while read url;do target=$(curl -s -I -H "Origin: https://evil.com" -X GET $url) | if grep 'https://evil.com'; then  echo [Potentional CORS Found] $url;else echo Nothing on "$url";fi;done`
 
 ## 1.2 Basic Origin Reflection payload - (Manualy) Send request in only one endpoint
 ### Workflow:  
